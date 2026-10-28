@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediFlow 360 | Connected Hospital Journey</title>
+<style>
+:root{--navy:#10243b;--blue:#1769aa;--teal:#11a99a;--bg:#f3f7fb;--ink:#203247;--muted:#64748b;--line:#e2eaf2;--white:#fff;--warn:#fff2d8;--red:#b45309}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#10243b,#1769aa);color:white;padding:25px max(5vw,20px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}.logo{background:#ffffff20;border:1px solid #ffffff40;border-radius:14px;padding:10px;font-size:25px}.brand h1{margin:0;font-size:24px}.brand p{margin:4px 0 0;color:#dbeafe;font-size:13px}.tag{border:1px solid #ffffff55;border-radius:999px;padding:8px 12px;font-size:12px}
+main{max-width:1100px;margin:25px auto;padding:0 18px}.intro{display:flex;justify-content:space-between;align-items:end;gap:18px;flex-wrap:wrap;margin-bottom:20px}.intro h2{margin:0 0 7px;font-size:26px;color:var(--navy)}.intro p{margin:0;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.tabs button,.primary,.secondary{border:0;border-radius:10px;padding:11px 15px;font-weight:650;cursor:pointer}.tabs button{background:#e4edf6;color:#36516b}.tabs button.active,.primary{background:var(--blue);color:white}.secondary{background:#e6f5f3;color:#087f73}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 5px 20px #10243b08}.card h3{margin:0 0 6px;color:var(--navy);font-size:17px}.sub{font-size:13px;color:var(--muted);margin:0 0 18px}.status{font-size:12px;border-radius:999px;padding:6px 9px;background:#e5f8f1;color:#087f5b;font-weight:700}.status.warn{background:var(--warn);color:var(--red)}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.patient{background:#f7fafc;border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:18px}.patient strong{display:block}.patient small{color:var(--muted)}
+.steps{display:grid;gap:0}.step{display:grid;grid-template-columns:32px 1fr auto;gap:12px;position:relative;padding:0 0 20px;align-items:start}.step:not(:last-child):before{content:"";position:absolute;left:15px;top:29px;height:calc(100% - 20px);width:2px;background:#dbe6ef}.dot{z-index:1;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:#e9eff5;color:#6b7d90;font-size:13px;font-weight:800}.step.done .dot{background:#d7f5eb;color:#087f5b}.step.current .dot{background:#dceeff;color:#1769aa;border:2px solid #8cc8ff}.step strong{font-size:14px;display:block;margin:3px 0}.step small{color:var(--muted)}.step select{max-width:125px;padding:7px;border:1px solid var(--line);border-radius:8px;background:white;color:#30475d}
+.metricrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.metric{padding:14px;border:1px solid var(--line);border-radius:12px;background:#fbfdff}.metric strong{display:block;font-size:22px;color:var(--navy)}.metric span{font-size:12px;color:var(--muted)}
+.alert{padding:13px;border-radius:11px;background:var(--warn);color:#8a4b06;font-size:13px;margin:12px 0}.tip{padding:14px;border-radius:12px;background:#e9f8f6;border:1px solid #c8eee8;margin-top:14px}.tip strong{display:block;color:#087f73;margin-bottom:5px}.tip p{font-size:13px;margin:0;color:#315f5a}
+label{display:block;font-size:13px;font-weight:650;margin:13px 0 6px}input,select.formselect{width:100%;padding:11px;border:1px solid #d6e1eb;border-radius:9px;background:white;font:inherit}button:focus,input:focus,select:focus{outline:3px solid #b9e4ff;outline-offset:1px}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}footer{text-align:center;color:#738398;font-size:12px;padding:25px 15px 35px}
+.hidden{display:none!important}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.intro h2{font-size:22px}.metricrow{grid-template-columns:repeat(3,1fr)}.card{padding:16px}.step{grid-template-columns:32px 1fr}.step select{grid-column:2;max-width:none}.brand h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">✚</div><div><h1>MediFlow 360</h1><p>One Patient. One Journey. One Connected System.</p></div></div>
+  <div class="tag">DEMO PROTOTYPE · FICTIONAL DATA ONLY</div>
+</header>
+<main>
+  <div class="intro"><div><h2>Hospital journey, connected.</h2><p>Follow each step, spot delays, and help everyone know what happens next.</p></div><div class="tag" style="color:#1769aa;border-color:#c8d9e8;background:white">● Demo environment</div></div>
+  <div class="tabs"><button class="active" id="patientTab" onclick="showView('patient')">Patient View</button><button id="staffTab" onclick="showView('staff')">Staff Dashboard</button></div>
+  <section id="patientView">
+    <div class="grid">
+      <div class="card">
+        <div class="topline"><h3>Your hospital journey</h3><span class="status" id="progressBadge">2 of 6 complete</span></div>
+        <p class="sub">A single timeline from registration to follow-up.</p>
+        <div class="patient"><div><strong id="patientName">Aarav Demo</strong><small id="patientId">Patient ID: MF-1024 · Demo record</small></div><span class="status" id="overallStatus">In progress</span></div>
+        <div id="timeline" class="steps"></div>
+      </div>
+      <div class="card">
+        <h3>At a glance</h3><p class="sub">The information a patient needs most.</p>
+        <div class="metricrow"><div class="metric"><strong id="completeCount">2/6</strong><span>Steps done</span></div><div class="metric"><strong id="pendingCount">4</strong><span>Remaining</span></div><div class="metric"><strong id="delayCount">1</strong><span>Delay flags</span></div></div>
+        <div id="alertBox" class="alert">⚠️ Demo alert: Lab tests are taking longer than the example target time.</div>
+        <div class="tip"><strong>➜ Your next step</strong><p id="nextStep">Proceed to the Lab & Diagnostics desk after consultation.</p></div>
+        <p class="sub" style="margin-top:15px">Prototype note: status changes are demonstrated in this browser session. This is not connected to a real hospital.</p>
+      </div>
+    </div>
+  </section>
+  <section id="staffView" class="hidden">
+    <div class="grid">
+      <div class="card">
+        <h3>Staff coordination panel</h3><p class="sub">Update a stage to demonstrate cross-department handover.</p>
+        <div class="patient"><div><strong id="staffPatientName">Aarav Demo</strong><small id="staffPatientId">MF-1024 · Fictional patient</small></div><span class="status">Demo record</span></div>
+        <div id="staffStages"></div>
+        <div class="actions"><button class="primary" onclick="applyUpdates()">Save status updates</button><button class="secondary" onclick="resetDemo()">Reset demo</button></div>
+        <div id="saveMessage" class="tip hidden"><strong>✓ Demo updated</strong><p>The patient timeline now reflects the status changes.</p></div>
+      </div>
+      <div class="card">
+        <h3>Coordination alerts</h3><p class="sub">Simple rules help staff spot bottlenecks.</p>
+        <div id="staffAlert" class="alert">⚠️ Lab & Diagnostics is flagged as delayed in this demo.</div>
+        <div class="tip"><strong>What makes MediFlow 360 different?</strong><p>It focuses on the handovers between departments, not only on a single appointment or record.</p></div>
+        <h3 style="margin-top:20px">Demo workflow</h3>
+        <p class="sub">1. Update a stage above.<br>2. Save the changes.<br>3. Return to Patient View to see the new journey and next step.</p>
+      </div>
+    </div>
+  </section>
+  <section class="card" style="margin-top:18px">
+    <div class="topline"><div><h3>Try a new fictional patient</h3><p class="sub" style="margin:5px 0 0">Create a sample record for your presentation demo.</p></div></div>
+    <div class="formrow"><div><label for="newName">Patient display name</label><input id="newName" placeholder="e.g. Demo Patient"></div><div><label for="newId">Demo patient ID</label><input id="newId" placeholder="e.g. MF-2048"></div></div>
+    <div class="actions"><button class="primary" onclick="createPatient()">Create demo patient</button></div><p class="sub" id="createMessage" aria-live="polite" style="margin-top:10px"></p>
+  </section>
+</main>
+<footer>MediFlow 360 · Student project prototype · Uses no real patient information</footer>
+<script>
+const stages=['Registration','Consultation','Lab & Diagnostics','Pharmacy','Billing','Follow-up'];
+const defaults=['Completed','Completed','Delayed','Pending','Pending','Pending'];
+let states=[...defaults], name='Aarav Demo', id='MF-1024';
+function showView(view){document.getElementById('patientView').classList.toggle('hidden',view!=='patient');document.getElementById('staffView').classList.toggle('hidden',view!=='staff');document.getElementById('patientTab').classList.toggle('active',view==='patient');document.getElementById('staffTab').classList.toggle('active',view==='staff');}
+function render(){
+ document.getElementById('patientName').textContent=name;document.getElementById('staffPatientName').textContent=name;
+ document.getElementById('patientId').textContent='Patient ID: '+id+' · Demo record';document.getElementById('staffPatientId').textContent=id+' · Fictional patient';
+ const done=states.filter(s=>s==='Completed').length, delays=states.filter(s=>s==='Delayed').length, next=states.findIndex(s=>s!=='Completed');
+ document.getElementById('progressBadge').textContent=done+' of 6 complete';document.getElementById('completeCount').textContent=done+'/6';document.getElementById('pendingCount').textContent=6-done;document.getElementById('delayCount').textContent=delays;
+ document.getElementById('overallStatus').textContent=done===6?'Journey complete':'In progress';
+ document.getElementById('nextStep').textContent=next===-1?'All demo stages are complete. Follow-up is recorded as done.':states[next]==='Delayed'?'Contact the '+stages[next]+' desk for an update.':'Proceed to '+stages[next]+'.';
+ document.getElementById('alertBox').classList.toggle('hidden',!delays);document.getElementById('alertBox').textContent=delays?'⚠️ '+stages[states.indexOf('Delayed')]+' is flagged as delayed in this demo.':'✓ No stages are currently flagged as delayed.';
+ document.getElementById('staffAlert').classList.toggle('hidden',!delays);document.getElementById('staffAlert').textContent=delays?'⚠️ '+stages[states.indexOf('Delayed')]+' is flagged as delayed in this demo.':'✓ No delay flags. All stages are within the demo status rules.';
+ document.getElementById('timeline').innerHTML=stages.map((s,i)=>{let cls=states[i]==='Completed'?'done':i===next?'current':'';return `<div class="step ${cls}"><div class="dot">${states[i]==='Completed'?'✓':i+1}</div><div><strong>${s}</strong><small>${states[i]==='Completed'?'Stage completed':states[i]==='Delayed'?'Needs staff attention':i===next?'Current / next stage':'Waiting for previous stage'}</small></div><span class="status ${states[i]==='Delayed'?'warn':''}">${states[i]}</span></div>`}).join('');
+ document.getElementById('staffStages').innerHTML=stages.map((s,i)=>`<label for="stage${i}">${s}</label><select class="formselect" id="stage${i}">${['Pending','In progress','Completed','Delayed'].map(v=>`<option ${states[i]===v?'selected':''}>${v}</option>`).join('')}</select>`).join('');
+}
+function applyUpdates(){states=stages.map((s,i)=>document.getElementById('stage'+i).value);render();document.getElementById('saveMessage').classList.remove('hidden');}
+function resetDemo(){states=[...defaults];name='Aarav Demo';id='MF-1024';document.getElementById('saveMessage').classList.add('hidden');render();}
+function createPatient(){const n=document.getElementById('newName').value.trim(),p=document.getElementById('newId').value.trim();if(!n||!p){document.getElementById('createMessage').textContent='Please enter both a display name and a demo ID.';return;}name=n;id=p;states=['Completed','In progress','Pending','Pending','Pending','Pending'];document.getElementById('createMessage').textContent='Created fictional demo record. Open Staff Dashboard to update its stages.';render();showView('patient');}
+render();
+</script>
+</body>
+</html>
